@@ -5,7 +5,7 @@
 > 把照片 / 卡通图转换成 **MARD 色板** 的拼豆图纸（perler bead pattern）生成器。
 > 桌面 GUI 一键操作，内置 AI 卡通化与纯 numpy 像素化算法，核心量化零重依赖。
 
-> 💡 **关于命名**：本项目原名 *Bead Studio*，因同名项目过多而改名为 **Beadobe**。代码、可执行文件与配置目录等内部标识仍保留原名（`BeadStudio.exe`、`bead_studio.py`、`%APPDATA%\BeadStudio` 等），属正常现象，不影响使用。
+> 💡 **关于命名**：本项目原名 *Bead Studio* (AI 给起的)，因同名项目过多而改名为 **Beadobe**。代码、可执行文件与配置目录等内部标识仍保留原名（`BeadStudio.exe`、`bead_studio.py`、`%APPDATA%\BeadStudio` 等），属正常现象，不影响使用。
 
 **🎯 图文操作手册**（二选一，内容相同）：
 - [manual.md](docs/manual.md) —— 可在 GitHub 直接在线阅读
