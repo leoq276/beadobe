@@ -1,5 +1,7 @@
 # 拼豆图纸生成器 (Bead Studio)
 
+> [**English**](README.en.md) · **中文**
+
 > 把照片 / 卡通图转换成 **MARD 色板** 的拼豆图纸（perler bead pattern）生成器。
 > 桌面 GUI 一键操作，内置 AI 卡通化与纯 numpy 像素化算法，核心量化零重依赖。
 

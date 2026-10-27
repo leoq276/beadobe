@@ -1,5 +1,7 @@
 # Bead Studio — Perler Bead Pattern Generator
 
+> **English** · [中文](README.md)
+
 > Turn photos / cartoon images into **MARD palette** perler bead patterns.
 > One-click desktop GUI, built-in AI cartoonization, and pure-numpy pixelization — zero heavy dependencies for the core pipeline.
 
