@@ -1,6 +1,8 @@
-# Bead Studio · 拼豆图纸生成器 — 操作手册
+# Beadobe · 拼豆图纸生成器 — 操作手册
 
 > 把照片 / 卡通图一键转换成可实际拼搭的 **MARD 色板**拼豆图纸。支持 AI 卡通化、手动编辑、参数调优与多种导出。
+
+> 💡 本项目原名 *Bead Studio*，因同名项目过多改名为 **Beadobe**。软件内部（可执行文件、代码、配置目录）仍沿用原名，属正常现象。
 
 ![完整流程演示](assets/demo_pipeline.png)
 
@@ -209,4 +211,4 @@ python bead_studio.py
 
 ---
 
-*Bead Studio · 拼豆图纸生成器 · 操作手册 v1.1*
+*Beadobe · 拼豆图纸生成器 · 操作手册 v1.1*

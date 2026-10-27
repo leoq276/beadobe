@@ -1759,7 +1759,7 @@ class CartoonizeWorker(QThread):
 class BeadStudio(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("拼豆图纸生成器 · Bead Studio")
+        self.setWindowTitle("拼豆图纸生成器 · Beadobe")
         self.resize(1180, 780)
         self.setAcceptDrops(True)
         # 窗口/应用图标（透明底图标，随打包一起收集为只读资源）
@@ -3821,7 +3821,7 @@ class BeadStudio(QMainWindow):
     def _on_about(self):
         QMessageBox.about(
             self, "关于 拼豆图纸生成器",
-            "<h3>拼豆图纸生成器 · Bead Studio</h3>"
+            "<h3>拼豆图纸生成器 · Beadobe</h3>"
             "<p>把照片转成 MARD 色板的拼豆图纸。</p>"
             "<p><b>核心算法:</b> 5 阶段管线<br>"
             "1) LLM 视觉理解 (已集成)<br>"

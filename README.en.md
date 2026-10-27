@@ -1,9 +1,11 @@
-# Bead Studio — Perler Bead Pattern Generator
+# Beadobe — Perler Bead Pattern Generator
 
 > **English** · [中文](README.md)
 
 > Turn photos / cartoon images into **MARD palette** perler bead patterns.
 > One-click desktop GUI, built-in AI cartoonization, and pure-numpy pixelization — zero heavy dependencies for the core pipeline.
+
+> 💡 **About the name**: this project was originally named *Bead Studio*, but was renamed to **Beadobe** because the old name was too common. Internal identifiers (the executable, code, and config directory) still keep the original name — e.g. `BeadStudio.exe`, `bead_studio.py`, `%APPDATA%\BeadStudio`. This is expected and does not affect usage.
 
 **🎯 Illustrated manual** (pick one, same content):
 - [manual.md](docs/manual.md) — readable directly on GitHub
@@ -29,7 +31,7 @@ Full workflow at a glance:
 
 ### Option 1: Download prebuilt binary (recommended, no environment needed)
 
-1. Go to [Releases](https://github.com/leoq276/bead-studio/releases) and download the latest `BeadStudio-v1.0.0-windows-x64.zip`
+1. Go to [Releases](https://github.com/leoq276/beadobe/releases) and download the latest `BeadStudio-v1.0.0-windows-x64.zip`
 2. Unzip and double-click `BeadStudio.exe` to run — no Python required
 
 ### Option 2: Run from source

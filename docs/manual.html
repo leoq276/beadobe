@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bead Studio · 操作手册</title>
+<title>Beadobe · 操作手册</title>
 <style>
   :root {
     --accent: #3b6ea5;
@@ -35,6 +35,7 @@
   header.hero h1 { font-size: 30px; font-weight: 700; letter-spacing: 0.5px; }
   header.hero h1 .dot { color: var(--accent); }
   header.hero p.sub { color: var(--text-3); margin-top: 8px; font-size: 15px; }
+  header.hero p.sub.note { font-size: 13px; color: var(--text-3); opacity: 0.9; }
   header.hero img.pipeline {
     width: 100%; border-radius: 10px; margin-top: 24px;
     border: 1px solid var(--line);
@@ -117,8 +118,9 @@
 <div class="page">
 
 <header class="hero">
-  <h1>Bead Studio <span class="dot">·</span> 拼豆图纸生成器</h1>
+  <h1>Beadobe <span class="dot">·</span> 拼豆图纸生成器</h1>
   <p class="sub">把照片 / 卡通图一键转换成可实际拼搭的 MARD 色板拼豆图纸。支持 AI 卡通化、手动编辑、参数调优与多种导出。</p>
+  <p class="sub note">💡 本项目原名 <em>Bead Studio</em>，因同名项目过多改名为 <b>Beadobe</b>。软件内部（可执行文件、代码、配置目录）仍沿用原名，属正常现象。</p>
   <img class="pipeline" src="assets/demo_pipeline.png" alt="流程演示：两条支线">
   <div class="caption">完整流程两条支线：同一张原始照片，不卡通化直接量化（A），或先 AI 卡通化再量化（B，推荐）。两张网格与图纸均与各自的输入源一一对应。</div>
 </header>
@@ -324,7 +326,7 @@ python bead_studio.py</code></pre>
   <p>把新色板做成 <code>code,name,hex</code> 格式的 CSV 替换 <code>palettes/mard.csv</code>（或改代码指向新文件）即可，量化器自动适配任意色数。</p>
 </section>
 
-<footer>Bead Studio · 拼豆图纸生成器 · 操作手册 v1.1</footer>
+<footer>Beadobe · 拼豆图纸生成器 · 操作手册 v1.1</footer>
 </div>
 </body>
 </html>
