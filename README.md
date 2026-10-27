@@ -98,14 +98,17 @@ python run_quantize.py --grid 64 --out-suffix _g64
 
 ---
 
-## 配置说明
+## 配置 API Key（启用 AI 卡通化）
 
-API Key 不存仓库：真实密钥放项目根目录 `.env`（已被 `.gitignore` 忽略），`config.yaml` 只保留 `env:ARK_API_KEY` / `env:LLM_API_KEY` 引用。
+AI 卡通化是可选项——不配置也能正常生成拼豆图纸。若想用「照片 → 卡通」功能，按以下步骤操作：
 
-> 首次使用：复制 `.env.example` 为 `.env`，填入火山方舟 + LLM 两个 Key。
+1. 打开软件，点工具栏「**⚙️ 设置**」按钮
+2. 在弹窗中填入两个 Key：
+   - **对话型 LLM**：用于理解照片关键特征（默认 MiniMax-M3，国内直连）
+   - **方舟生图**：用于照片转卡通（豆包 SeedDream）
+3. 点「测试连接」验证（会消耗少量 token），通过后即可使用「卡通化当前图片」
 
-- **方舟（豆包）**：卡通化用 `doubao-seedream-5-0-pro`，局部重绘用 `doubao-seededit-3.0-t`
-- **LLM**：默认 `MiniMax-M3`（原生多模态，国内直连），也可在设置中切换 codexcn / openai / anthropic / gemini / qwen 等 OpenAI 兼容端点
+> 密钥只保存在你自己的电脑本地，不会上传；其他 LLM 服务（openai / anthropic / gemini / qwen 等）也可在设置里一键切换。详见操作手册第 3 节。
 
 ---
 
@@ -170,7 +173,7 @@ API Key 不存仓库：真实密钥放项目根目录 `.env`（已被 `.gitignor
 | 算法 / 来源 | 用途 | 许可 |
 |-------------|------|------|
 | **PixelOE** — [KohakuBlueleaf/PixelOE](https://github.com/KohakuBlueleaf/PixelOE) | 像素化（pixeloe），纯 numpy 移植，与官方 torch 实现逐像素对齐 | Apache-2.0 |
-| **DPID** — Weber et al., *Rapid, Detail-Preserving Image Downscaling*, SIGGRAPH Asia 2016 | 像素化（dpid），numpy 移植自官方 Matlab 版 | 学术论文 |
+| **DPID** — Weber et al., *Rapid, Detail-Preserving Image Downscaling*, SIGGRAPH Asia 2016（[mergian/dpid](https://github.com/mergian/dpid)） | 像素化（dpid），numpy 移植自官方 Matlab 版 | 学术论文 |
 | **cv2.INTER_AREA** — [OpenCV](https://opencv.org/) | 像素化（area），面积插值下采样 | Apache-2.0 |
 | **MARD 221 色板** | 拼豆色号体系 | — |
 

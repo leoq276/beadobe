@@ -98,14 +98,17 @@ python run_quantize.py --grid 64 --out-suffix _g64
 
 ---
 
-## Configuration
+## Configure API Keys (to enable AI cartoonization)
 
-API keys are **not** stored in the repo: real keys live in `.env` (git-ignored); `config.yaml` only keeps `env:ARK_API_KEY` / `env:LLM_API_KEY` references.
+AI cartoonization is optional — you can generate bead patterns without it. To use "photo → cartoon", follow these steps:
 
-> First run: copy `.env.example` to `.env` and fill in your Volcengine Ark + LLM keys.
+1. Open the app and click the "**⚙️ Settings**" button in the toolbar
+2. Fill in two keys in the dialog:
+   - **LLM**: used to understand key photo features (defaults to MiniMax-M3, direct connection in China)
+   - **Ark image generation**: used for photo-to-cartoon (Doubao SeedDream)
+3. Click "Test Connection" to verify (consumes a small amount of tokens), then use "Cartoonize Current Image"
 
-- **Ark (Doubao)**: cartoonization via `doubao-seedream-5-0-pro`, inpainting via `doubao-seededit-3.0-t`
-- **LLM**: defaults to `MiniMax-M3` (native multimodal); switchable to codexcn / openai / anthropic / gemini / qwen and other OpenAI-compatible endpoints
+> Keys are stored only on your local machine and never uploaded; other LLM providers (openai / anthropic / gemini / qwen, etc.) can be switched in Settings. See manual Section 3 for details.
 
 ---
 
@@ -170,7 +173,7 @@ The following AI tools assisted coding, design, and documentation during develop
 | Algorithm / Source | Purpose | License |
 |--------------------|---------|---------|
 | **PixelOE** — [KohakuBlueleaf/PixelOE](https://github.com/KohakuBlueleaf/PixelOE) | Pixelization (pixeloe), pure-numpy port, pixel-identical to the official torch implementation | Apache-2.0 |
-| **DPID** — Weber et al., *Rapid, Detail-Preserving Image Downscaling*, SIGGRAPH Asia 2016 | Pixelization (dpid), numpy port from the official Matlab version | Academic paper |
+| **DPID** — Weber et al., *Rapid, Detail-Preserving Image Downscaling*, SIGGRAPH Asia 2016 ([mergian/dpid](https://github.com/mergian/dpid)) | Pixelization (dpid), numpy port from the official Matlab version | Academic paper |
 | **cv2.INTER_AREA** — [OpenCV](https://opencv.org/) | Pixelization (area), area interpolation downscaling | Apache-2.0 |
 | **MARD 221 palette** | Perler bead color system | — |
 
