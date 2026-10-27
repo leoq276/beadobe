@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bead Studio · 操作手册</title>
+<style>
+  :root {
+    --accent: #3b6ea5;
+    --accent-dark: #2f5f8a;
+    --text: #2b3440;
+    --text-2: #5a6572;
+    --text-3: #7a828e;
+    --bg: #f4f6f8;
+    --card: #ffffff;
+    --line: #e3e7ec;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.75;
+  }
+  .page { max-width: 980px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  header.hero {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 36px 40px 32px;
+    margin-bottom: 32px;
+  }
+  header.hero h1 { font-size: 30px; font-weight: 700; letter-spacing: 0.5px; }
+  header.hero h1 .dot { color: var(--accent); }
+  header.hero p.sub { color: var(--text-3); margin-top: 8px; font-size: 15px; }
+  header.hero img.pipeline {
+    width: 100%; border-radius: 10px; margin-top: 24px;
+    border: 1px solid var(--line);
+  }
+  header.hero .caption { text-align: center; color: var(--text-3); font-size: 13px; margin-top: 10px; }
+
+  nav.toc {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 28px;
+    margin-bottom: 32px;
+    display: flex; flex-wrap: wrap; gap: 8px 24px;
+  }
+  nav.toc a {
+    color: var(--accent-dark); text-decoration: none; font-size: 14px;
+    padding: 2px 0;
+  }
+  nav.toc a:hover { text-decoration: underline; }
+
+  section {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 32px 40px;
+    margin-bottom: 24px;
+  }
+  section h2 {
+    font-size: 21px; font-weight: 700; color: var(--accent-dark);
+    padding-bottom: 12px; margin-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+  }
+  section h2 .no {
+    display: inline-block; background: var(--accent); color: #fff;
+    border-radius: 6px; font-size: 14px; padding: 1px 9px;
+    margin-right: 10px; vertical-align: 2px;
+  }
+  section h3 { font-size: 16px; margin: 22px 0 10px; color: var(--text); }
+  section p { margin: 10px 0; }
+  section ul, section ol { padding-left: 24px; margin: 10px 0; }
+  section li { margin: 5px 0; }
+  section img.shot {
+    width: 100%; border-radius: 8px; border: 1px solid var(--line);
+    margin: 14px 0 4px;
+  }
+  .caption { color: var(--text-3); font-size: 13px; text-align: center; margin-bottom: 8px; }
+
+  code {
+    background: #eef2f6; border-radius: 4px; padding: 1px 6px;
+    font-family: Consolas, "Courier New", monospace; font-size: 13px; color: #2f5f8a;
+  }
+  pre {
+    background: #f6f8fa; border: 1px solid var(--line); border-radius: 8px;
+    padding: 14px 18px; overflow-x: auto; margin: 12px 0;
+  }
+  pre code { background: none; padding: 0; color: var(--text); font-size: 13px; line-height: 1.6; }
+
+  table { border-collapse: collapse; width: 100%; margin: 14px 0; font-size: 14px; }
+  th, td { border: 1px solid var(--line); padding: 8px 12px; text-align: left; vertical-align: top; }
+  th { background: #f2f5f8; color: var(--text-2); font-weight: 600; white-space: nowrap; }
+  tr:nth-child(even) td { background: #fafbfc; }
+
+  .tip, .warn {
+    border-radius: 8px; padding: 12px 18px; margin: 14px 0; font-size: 14px;
+  }
+  .tip { background: #eef6ef; border: 1px solid #cfe5d2; }
+  .warn { background: #fdf6ec; border: 1px solid #f0e0c0; }
+  .tip b:first-child, .warn b:first-child { display: inline-block; margin-right: 6px; }
+
+  .kbd {
+    display: inline-block; background: #fff; border: 1px solid #cfd6de;
+    border-bottom-width: 2px; border-radius: 5px; padding: 0 7px;
+    font-family: Consolas, monospace; font-size: 12.5px; color: var(--text-2);
+  }
+
+  footer { text-align: center; color: var(--text-3); font-size: 13px; margin-top: 32px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="hero">
+  <h1>Bead Studio <span class="dot">·</span> 拼豆图纸生成器</h1>
+  <p class="sub">把照片 / 卡通图一键转换成可实际拼搭的 MARD 色板拼豆图纸。支持 AI 卡通化、手动编辑、参数调优与多种导出。</p>
+  <img class="pipeline" src="assets/demo_pipeline.png" alt="流程演示：两条支线">
+  <div class="caption">完整流程两条支线：同一张原始照片，不卡通化直接量化（A），或先 AI 卡通化再量化（B，推荐）。两张网格与图纸均与各自的输入源一一对应。</div>
+</header>
+
+<nav class="toc">
+  <a href="#s1">1 安装与启动</a>
+  <a href="#s2">2 快速上手五步走</a>
+  <a href="#s3">3 卡通化（可选）</a>
+  <a href="#s4">4 手动编辑</a>
+  <a href="#s5">5 参数调优参考</a>
+  <a href="#s6">6 导出与导入</a>
+  <a href="#s7">7 快捷键</a>
+  <a href="#s8">8 常见问题</a>
+</nav>
+
+<!-- ============ 1 安装 ============ -->
+<section id="s1">
+  <h2><span class="no">1</span>安装与启动</h2>
+
+  <h3>方式 A：直接运行打包版（推荐，开箱即用）</h3>
+  <ol>
+    <li>拿到 <code>BeadStudio</code> 文件夹（内含 <code>BeadStudio.exe</code> 与 <code>_internal</code>）。</li>
+    <li>双击 <code>BeadStudio.exe</code> 即可启动，无需安装 Python。</li>
+    <li>首次启动会在用户目录自动生成配置（<code>%APPDATA%\BeadStudio</code>），不影响使用。</li>
+  </ol>
+
+  <h3>方式 B：源码运行（适合想改代码 / 用到最新功能）</h3>
+  <pre><code># 1. 安装 Python 3.10+ 后安装依赖
+pip install numpy pillow opencv-python PySide6 pyyaml requests
+
+# 2. （可选，AI 卡通化需要）
+pip install openai
+
+# 3. 在项目目录启动
+python bead_studio.py</code></pre>
+
+  <div class="tip"><b>💡</b>缺失可选依赖时程序不会崩溃，会弹窗说明哪些功能不可用，其余功能照常工作。</div>
+</section>
+
+<!-- ============ 2 快速上手 ============ -->
+<section id="s2">
+  <h2><span class="no">2</span>快速上手五步走</h2>
+
+  <h3>第 1 步 · 打开图片</h3>
+  <p>点击左上角「<b>打开图片</b>」，或直接把图片<b>拖进窗口</b>。支持 JPG / PNG 等常见格式。</p>
+
+  <h3>第 2 步 ·（可选）AI 卡通化</h3>
+  <p>这里是一个<b>岔路口</b>，决定走哪条支线（见顶部流程图）：</p>
+  <ul>
+    <li><b>支线 A · 不卡通化</b>：照片直接点「生成拼豆图纸」。优点是零成本、零等待、色彩最忠实；缺点是照片背景和光影杂色多，主体不够干净。</li>
+    <li><b>支线 B · 先卡通化</b>：点「<b>卡通化当前图片</b>」（需 API Key，见 <a href="#s3">第 3 节</a>），完成后右侧自动切到「卡通图」Tab——此时再点「生成拼豆图纸」，<b>量化的就是卡通版</b>，色块干净、轮廓清晰、眼睛等关键细节保留更好。</li>
+  </ul>
+  <div class="tip"><b>💡</b>生成图纸永远以右侧当前所在的源图 Tab 为准（原图 / 卡通图 / 转化缓冲区）。想对比两条支线的效果，分别在两个 Tab 下各生成一次即可。</div>
+
+  <h3>第 3 步 · 生成拼豆图纸</h3>
+  <p>点左侧底部蓝色「<b>生成拼豆图纸</b>」按钮（或 <span class="kbd">Ctrl+R</span>）。几秒后右侧会同时出现：</p>
+  <ul>
+    <li><b>网格预览</b>——纯色块 + 网格线，用于对照摆豆；</li>
+    <li><b>拼豆图纸</b>——每格标注 MARD 色号，带行列号与底部图例，可打印照做；</li>
+    <li><b>像素化预览</b>——无网格线的成品效果，模拟拼豆烫化后的样子。</li>
+  </ul>
+
+  <h3>第 4 步 · 手动微调（可选）</h3>
+  <p>切到左侧「<b>编辑</b>」页，用画笔 / 擦除 / 框选工具修整细节（见 <a href="#s4">第 4 节</a>）。算法不是完美的——尤其是眼睛、胡须这类 1–2 格的关键细节，手动点几下往往效果最好。</p>
+
+  <h3>第 5 步 · 导出</h3>
+  <p>点「<b>导出</b>」（<span class="kbd">Ctrl+S</span>），勾选需要的产物：</p>
+  <table>
+    <tr><th>产物</th><th>用途</th></tr>
+    <tr><td>拼豆图纸 PNG</td><td>打印出来，按色号逐格拼搭</td></tr>
+    <tr><td>网格预览 PNG</td><td>屏幕对照，色块更直观</td></tr>
+    <tr><td>像素化预览 PNG</td><td>分享 / 预览成品效果</td></tr>
+    <tr><td>JSON 色号矩阵</td><td>二次开发（统计用豆量、生成加工文件）</td></tr>
+  </table>
+  <p>导出前可自定义文件名基名与输出目录。</p>
+</section>
+
+<!-- ============ 3 卡通化 ============ -->
+<section id="s3">
+  <h2><span class="no">3</span>卡通化（可选，需 API Key）</h2>
+  <p>卡通化分两步自动完成：<b>对话型 LLM 理解图片关键特征</b>（眼睛、耳朵、花纹位置）→ <b>豆包 SeedDream 图生图</b>转成干净色块的卡通风格。关键特征坐标会传给量化器，让眼睛、鼻线等细节在低网格下也能保留。</p>
+
+  <img class="shot" src="assets/ui_settings.png" alt="API 设置对话框">
+  <div class="caption">工具栏「设置」→ 填入对话型 LLM 与方舟生图的 API Key，可点击「测试连接」验证</div>
+
+  <ol>
+    <li>点工具栏「<b>设置</b>」，分别配置「对话型多模态 LLM」和「方舟生图」的 API Key（密钥保存在本地 <code>.env</code> 文件，不会上传）。</li>
+    <li>点「测试连接」确认可用。注意：测试会发送真实请求，<b>可能消耗少量 token / 费用</b>。</li>
+    <li>回到主界面，载入照片后点「<b>卡通化当前图片</b>」（约 1–2 分钟）。</li>
+    <li>完成后卡通图出现在右侧「卡通图」Tab。<b>生成图纸以当前源图 Tab 为准</b>——停在「卡通图」Tab 再点「生成」，产出的网格与图纸就来自卡通版（即流程图中的支线 B）。</li>
+  </ol>
+
+  <h3>卡通化前后对比</h3>
+  <p>同一张鹿照片，两条支线在 52×52 网格下的差异（对应顶部流程图）：</p>
+  <ul>
+    <li><b>支线 A（直接量化）</b>：背景森林与光影被如实转成色块，主体轮廓偏碎，细节较模糊。</li>
+    <li><b>支线 B（先卡通化）</b>：AI 把画面简化成干净色块并突出面部特征，网格里鹿的眼睛、耳廓、斑点都清晰可辨，成品效果显著更好。</li>
+  </ul>
+
+  <h3>自定义 Prompt</h3>
+  <p>「卡通化」分组里可填写自定义 Prompt 直接指定风格（例：<i>「清新可爱的卡通猫，白色短毛，半眯眼，干净色块」</i>），填了就跳过 LLM 自动描述。</p>
+
+  <div class="warn"><b>⚠</b>卡通化会调用云端 API 并产生费用；缺少 Key 时该功能不可用，但不影响本地量化生成图纸。</div>
+</section>
+
+<!-- ============ 4 手动编辑 ============ -->
+<section id="s4">
+  <h2><span class="no">4</span>手动编辑</h2>
+
+  <img class="shot" src="assets/ui_result_edit.png" alt="编辑页">
+  <div class="caption">「编辑」页：撤销/重做、五种工具、221 色色板（点击选色）</div>
+
+  <h3>五种工具</h3>
+  <table>
+    <tr><th>工具</th><th>操作</th></tr>
+    <tr><td>🖌 画笔</td><td>点击 / 拖动涂色；在色板上<b>悬停</b>可实时预览改色效果，点击确认</td></tr>
+    <tr><td>🧽 擦除</td><td>点击 / 拖动把格子清空为空白</td></tr>
+    <tr><td>💧 取色</td><td>点击任意格子，把它颜色设为画笔色</td></tr>
+    <tr><td>⬚ 框选</td><td>拖动 = 路径选择；<span class="kbd">Shift</span>+拖动 = 方形框选；单击 = 反选单格；右键 = 清空选择</td></tr>
+    <tr><td>✋ 平移</td><td>拖动平移画布；<span class="kbd">Ctrl</span>+滚轮缩放</td></tr>
+  </table>
+
+  <h3>选中与批量改色</h3>
+  <ul>
+    <li>「<b>按颜色选中…</b>」弹出颜色列表面板（按用量排序），可多选；「<b>图上点选同色</b>」则在网格上点一格选中全部同色格。</li>
+    <li>选中后，用「<b>改为</b>」选目标色（色块 + 色号），点「应用」一键批量改色，也可直接在色板上点色确认。</li>
+    <li>加深 / 变浅 / 对比度三个滑条可对选中格子做实时颜色微调。</li>
+    <li>所有编辑支持 <span class="kbd">Ctrl+Z</span> 撤销 / <span class="kbd">Ctrl+Shift+Z</span> 重做，导出的永远是<b>编辑后的最终结果</b>。</li>
+  </ul>
+
+  <h3>框选区域生成</h3>
+  <p>在「原图」/「卡通图」Tab 上直接拖拽即可框选区域（可拖边角微调），只对选中区域做量化——适合照片主体小、想放大细节的场景。选区会显示在「转化缓冲区」Tab。</p>
+</section>
+
+<!-- ============ 5 参数 ============ -->
+<section id="s5">
+  <h2><span class="no">5</span>参数调优参考</h2>
+  <p>默认参数（pixeloe + nearest）适合大多数图片。以下是最值得调的几项：</p>
+
+  <table>
+    <tr><th>参数</th><th>默认</th><th>怎么调</th></tr>
+    <tr><td>Grid size</td><td>52</td>
+        <td>16–104。越大细节越多，但豆板数量与工作量也增加。16/32 适合做挂件小图，52 对应一整块标准板，104 适合大幅作品</td></tr>
+    <tr><td>像素化方法</td><td>pixeloe</td>
+        <td><b>pixeloe</b>：轮廓干净、色块分明（推荐照片/卡通）；<b>area</b>：直接平均，最朴素；<b>dpid</b>：保留更多纹理；<b>SuperSample</b>：超采样+投票，可抢救细线条</td></tr>
+    <tr><td>POE mode</td><td>nearest</td>
+        <td>center/contrast 增强对比；bicubic 更平滑；nearest 边缘锐利</td></tr>
+    <tr><td>thickness</td><td>3</td>
+        <td>PixelOE 轮廓描边粗细，0 = 关闭。线条发虚可加到 4–5，太重可减</td></tr>
+    <tr><td>超采样（仅 SuperSample）</td><td>4 / vote</td>
+        <td>策略 <b>darkest</b> 保留深色描边（适合线稿），<b>line_aware</b> 配合线条检测抢救胡须等细线</td></tr>
+    <tr><td>Min island size</td><td>2</td>
+        <td>小于该面积的孤立色块会被清理；调大画面更干净，调小保留更多细节</td></tr>
+    <tr><td>Cleanup ΔE</td><td>20</td>
+        <td>清理时的色差阈值：与周围差异大于它的孤立块视为关键特征保留（如黑色瞳孔）</td></tr>
+  </table>
+
+  <div class="tip"><b>💡</b>调参心法：先用默认生成看整体 → 眼睛/胡须细节丢了就开「线条检测」或提高 grid → 杂色太多就加大 Min island size。</div>
+</section>
+
+<!-- ============ 6 导出与导入 ============ -->
+<section id="s6">
+  <h2><span class="no">6</span>导出与导入</h2>
+  <ul>
+    <li><b>导出</b>（<span class="kbd">Ctrl+S</span>）：四类产物按需勾选，统一文件名基名（默认取图片名或「图纸命名」框内容）。</li>
+    <li><b>导入 JSON</b>（<span class="kbd">Ctrl+I</span>）：载入之前导出的色号矩阵，继续编辑或重新导出——图纸数据可以无损搬运。</li>
+  </ul>
+</section>
+
+<!-- ============ 7 快捷键 ============ -->
+<section id="s7">
+  <h2><span class="no">7</span>快捷键</h2>
+  <table>
+    <tr><th>快捷键</th><th>功能</th></tr>
+    <tr><td><span class="kbd">Ctrl+O</span></td><td>打开图片</td></tr>
+    <tr><td><span class="kbd">Ctrl+R</span></td><td>生成拼豆图纸</td></tr>
+    <tr><td><span class="kbd">Ctrl+S</span></td><td>导出</td></tr>
+    <tr><td><span class="kbd">Ctrl+I</span></td><td>导入 JSON</td></tr>
+    <tr><td><span class="kbd">Ctrl+Z</span> / <span class="kbd">Ctrl+Shift+Z</span></td><td>撤销 / 重做</td></tr>
+    <tr><td><span class="kbd">Ctrl+A</span></td><td>全选格子</td></tr>
+    <tr><td><span class="kbd">Ctrl</span>+滚轮</td><td>缩放画布（任意工具下）</td></tr>
+    <tr><td><span class="kbd">Ctrl</span>+点击</td><td>任意模式下临时取色</td></tr>
+  </table>
+</section>
+
+<!-- ============ 8 FAQ ============ -->
+<section id="s8">
+  <h2><span class="no">8</span>常见问题</h2>
+
+  <h3>生成失败 / 按钮是灰的？</h3>
+  <p>「生成」需要先打开图片；「卡通化」需要先配置 API Key 并联网。看底部状态栏提示即可定位。</p>
+
+  <h3>眼睛、胡须等细节丢失？</h3>
+  <p>三招依次尝试：① 提高 Grid size；② 像素化方法换 SuperSample + 线条检测（方法选 canny）；③ 切到编辑页手动画上去——往往最快。</p>
+
+  <h3>色号在实物豆子里找不到？</h3>
+  <p>所有色号来自 MARD 221 色色板（<code>palettes/mard.csv</code>），按色号采购即可。若某色缺货，可用批量改色换成近似色（编辑页「改为」）。</p>
+
+  <h3>测试连接 / 卡通化报错？</h3>
+  <p>先检查 Key 与网络；方舟接口偶尔限流，重试即可。测试连接本身会发真实请求并消耗少量 token。</p>
+
+  <h3>想换色板？</h3>
+  <p>把新色板做成 <code>code,name,hex</code> 格式的 CSV 替换 <code>palettes/mard.csv</code>（或改代码指向新文件）即可，量化器自动适配任意色数。</p>
+</section>
+
+<footer>Bead Studio · 拼豆图纸生成器 · 操作手册 v1.1</footer>
+</div>
+</body>
+</html>

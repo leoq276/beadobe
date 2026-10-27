@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 敏感配置（真实 API Key，勿提交）
+.env
+
+# 归档的临时调试文件
+trash/
+
+# WorkBuddy 项目数据（非项目源码）
+.workbuddy/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# 运行时产物
+outputs/
+
+# PyInstaller 打包产物
+build/
+dist/
+
+# 备份与临时文件
+*.bak
+*.bak.py
+_test_*.jpg
+_test_*.png
+_*.py
+
+# 调试/对比图（samples 里的临时产物）
+samples/_*.png
+samples/cat2_seedream_region_crop_bead_*.png
+samples/cat2_seedream_region_crop_bead_*.json
+samples/cat_seedream*.png
+
+# 旧版打包 spec（保留优化后的 bead_studio.spec）
+BeadStudio.spec
