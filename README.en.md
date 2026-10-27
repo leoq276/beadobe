@@ -27,10 +27,10 @@ Full workflow at a glance:
 
 ## Quick Start
 
-### Option 1: Prebuilt binary (recommended, no environment needed)
+### Option 1: Download prebuilt binary (recommended, no environment needed)
 
-1. Download `dist/BeadStudio/BeadStudio.exe`
-2. Double-click to run
+1. Go to [Releases](https://github.com/leoq276/bead-studio/releases) and download the latest `BeadStudio-v1.0.0-windows-x64.zip`
+2. Unzip and double-click `BeadStudio.exe` to run — no Python required
 
 ### Option 2: Run from source
 

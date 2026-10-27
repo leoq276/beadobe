@@ -27,10 +27,10 @@
 
 ## 快速开始
 
-### 方式一：打包版（推荐，无需装环境）
+### 方式一：下载打包版（推荐，无需装环境）
 
-1. 下载 `dist/BeadStudio/BeadStudio.exe`
-2. 双击运行即可
+1. 前往 [Releases](https://github.com/leoq276/bead-studio/releases) 下载最新的 `BeadStudio-v1.0.0-windows-x64.zip`
+2. 解压后双击 `BeadStudio.exe` 即可运行，无需安装 Python
 
 ### 方式二：源码运行
 
