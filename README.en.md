@@ -139,7 +139,7 @@ Image → [line detection] → 4x supersample → layered color decision → dow
 
 ## Known Limitations
 
-- **A 52×52 grid can't hold full whiskers**: 1px-wide whiskers are lost after downscaling; raise grid to 64/80 (exceeds a single physical board)
+- **A 52×52 grid can't hold full whiskers**: 1px-wide details (e.g., whiskers) are probably lost after downscaling; raise grid to 64/80 (exceeds a single physical board)
 - **Outline thickness vs. "cleanliness" tradeoff**: `line_aware` thickens outlines but introduces more black pixels
 - **Frangi can't detect black lines** (by design), not recommended for this use case
 - **Packaged binary ~256 MB** (includes Qt runtime)
