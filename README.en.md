@@ -5,7 +5,7 @@
 > Turn photos / cartoon images into **MARD palette** perler bead patterns.
 > One-click desktop GUI, built-in AI cartoonization, and pure-numpy pixelization — zero heavy dependencies for the core pipeline.
 
-> 💡 **About the name**: this project was originally named *Bead Studio*, but was renamed to **Beadobe** because the old name was too common. Internal identifiers (the executable, code, and config directory) still keep the original name — e.g. `BeadStudio.exe`, `bead_studio.py`, `%APPDATA%\BeadStudio`. This is expected and does not affect usage.
+> 💡 **About the name**: this project was originally named *Bead Studio* (named by AI), but was renamed to **Beadobe** because the old name was too common. Internal identifiers (the executable, code, and config directory) still keep the original name — e.g. `BeadStudio.exe`, `bead_studio.py`, `%APPDATA%\BeadStudio`. This is expected and does not affect usage.
 
 **🎯 Illustrated manual** (pick one, same content):
 - [manual.md](docs/manual.md) — readable directly on GitHub
