@@ -1,10 +1,10 @@
 """
-bead_studio.py
-拼豆图纸生成器 - 桌面 GUI (PySide6)
+beadobe.py
+拼豆图纸生成器 (Beadobe) - 桌面 GUI (PySide6)
 
 用法:
     conda activate NDP
-    python bead_studio.py
+    python beadobe.py
 
 功能:
     - 拖入/选择图片
@@ -1598,6 +1598,24 @@ class QuantizeWorker(QThread):
     def cancel(self):
         self._cancel = True
 
+    @staticmethod
+    def _compute_grid_wh(image_path: str, grid: int):
+        """根据图片宽高比计算网格宽高，保持原比例（不拉伸）。
+
+        长边 = grid 格，短边 = round(grid * 短边/长边) 格（至少 1）。
+        返回 (grid_w, grid_h)。
+        """
+        from PIL import Image as _PILImage
+        with _PILImage.open(image_path) as im:
+            w, h = im.size
+        if w >= h:
+            grid_w = grid
+            grid_h = max(1, round(grid * h / w))
+        else:
+            grid_h = grid
+            grid_w = max(1, round(grid * w / h))
+        return grid_w, grid_h
+
     def run(self):
         try:
             self.progress.emit("加载 MARD 色板...")
@@ -1633,11 +1651,14 @@ class QuantizeWorker(QThread):
             # 关键特征：由卡通化流程注入（若有）；区域量化时不套用全局 bbox
             key_features = self.key_features if self.region is None else None
 
-            self.progress.emit(f"色板量化到 {grid}×{grid}...")
+            # 根据图片宽高比计算网格宽高，保持原比例（长边 = grid，短边按比例缩放）
+            grid_w, grid_h = self._compute_grid_wh(image_to_quantize, grid)
+
+            self.progress.emit(f"色板量化到 {grid_w}×{grid_h}...")
             result = quantize(
                 image_to_quantize,
-                grid_w=grid,
-                grid_h=grid,
+                grid_w=grid_w,
+                grid_h=grid_h,
                 palette=palette,
                 min_island_size=self.min_island_size,
                 cleanup=True,
@@ -1676,16 +1697,16 @@ class QuantizeWorker(QThread):
             out_dir.mkdir(parents=True, exist_ok=True)
             stem = self.chart_name or Path(self.image_path).stem
             suffix = "_region" if self.region is not None else ""
-            chart_path = out_dir / f"{stem}{suffix}_bead_chart_{grid}x{grid}.png"
-            grid_path = out_dir / f"{stem}{suffix}_bead_grid_{grid}x{grid}.png"
-            json_path = out_dir / f"{stem}{suffix}_bead_grid_{grid}x{grid}.json"
+            chart_path = out_dir / f"{stem}{suffix}_bead_chart_{grid_w}x{grid_h}.png"
+            grid_path = out_dir / f"{stem}{suffix}_bead_grid_{grid_w}x{grid_h}.png"
+            json_path = out_dir / f"{stem}{suffix}_bead_grid_{grid_w}x{grid_h}.json"
 
             self.progress.emit("渲染拼豆图纸...")
-            cell_px = max(8, min(24, 1800 // grid))
+            cell_px = max(8, min(24, 1800 // max(grid_w, grid_h)))
             save_bead_chart(
                 result, str(chart_path),
                 cell_px=cell_px,
-                label_every=max(5, grid // 12),
+                label_every=max(5, max(grid_w, grid_h) // 12),
                 title=stem,
                 palette_name="MARD",
             )
@@ -1756,7 +1777,7 @@ class CartoonizeWorker(QThread):
 # 主窗口
 # =============================================================================
 
-class BeadStudio(QMainWindow):
+class Beadobe(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("拼豆图纸生成器 · Beadobe")
@@ -2130,7 +2151,8 @@ class BeadStudio(QMainWindow):
         gb_basic = QGroupBox("基础参数")
         grid = QGridLayout(gb_basic)
         # Grid size（滑块 + 输入框双向联动，上限 104）
-        grid.addWidget(QLabel("Grid size (16-104):"), 0, 0)
+        # 该值表示「长边」的格子数；短边按图片宽高比自动缩放（保持原比例，不拉伸）
+        grid.addWidget(QLabel("Grid size 长边 (16-104):"), 0, 0)
         self.grid_slider = QSlider(Qt.Horizontal)
         self.grid_slider.setRange(16, 104)
         self.grid_slider.setValue(52)
@@ -3127,8 +3149,9 @@ class BeadStudio(QMainWindow):
         """根据当前（可能已编辑的）result 重渲染网格预览与图纸。"""
         if self.result is None:
             return
-        grid = self.grid_slider.value()
-        cell_px = max(8, min(24, 1800 // grid))
+        grid_w = self.result.grid_w
+        grid_h = self.result.grid_h
+        cell_px = max(8, min(24, 1800 // max(grid_w, grid_h)))
         # 网格预览直接由控件绘制（result 已更新，直接 update）
         self.lbl_grid.update()
         # 图纸重渲染（色号全标注 + 放大图例）
@@ -3136,10 +3159,10 @@ class BeadStudio(QMainWindow):
         suffix = "_region" if self.region is not None else ""
         out_dir = Path(self.out_edit.text())
         out_dir.mkdir(parents=True, exist_ok=True)
-        chart_path = out_dir / f"{stem}{suffix}_bead_chart_{grid}x{grid}.png"
-        grid_path = out_dir / f"{stem}{suffix}_bead_grid_{grid}x{grid}.png"
-        plain_path = out_dir / f"{stem}{suffix}_bead_plain_{grid}x{grid}.png"
-        json_path = out_dir / f"{stem}{suffix}_bead_grid_{grid}x{grid}.json"
+        chart_path = out_dir / f"{stem}{suffix}_bead_chart_{grid_w}x{grid_h}.png"
+        grid_path = out_dir / f"{stem}{suffix}_bead_grid_{grid_w}x{grid_h}.png"
+        plain_path = out_dir / f"{stem}{suffix}_bead_plain_{grid_w}x{grid_h}.png"
+        json_path = out_dir / f"{stem}{suffix}_bead_grid_{grid_w}x{grid_h}.json"
 
         # 图纸：色号全标注
         save_bead_chart(
@@ -3147,7 +3170,7 @@ class BeadStudio(QMainWindow):
             cell_px=cell_px,
             label_every=1,
             label_all_cells=True,
-            title=f"拼豆图纸 - {stem} · {grid}×{grid}",
+            title=f"拼豆图纸 - {stem} · {grid_w}×{grid_h}",
             palette_name="MARD",
         )
         # 网格预览 PNG（纯色块，供保存）
@@ -3569,14 +3592,15 @@ class BeadStudio(QMainWindow):
         self._update_undo_buttons()
 
         # 图纸：用色号全标注重新渲染（标题/文件名用用户命名的图纸名）
-        grid = self.grid_slider.value()
-        cell_px = max(8, min(24, 1800 // grid))
+        grid_w = result.grid_w
+        grid_h = result.grid_h
+        cell_px = max(8, min(24, 1800 // max(grid_w, grid_h)))
         stem = (self.chart_name_edit.text().strip()
                 or (Path(self.image_path).stem if self.image_path else "bead"))
         suffix = "_region" if self.region is not None else ""
         out_dir = Path(self.out_edit.text())
-        chart_path2 = out_dir / f"{stem}{suffix}_bead_chart_{grid}x{grid}.png"
-        plain_path2 = out_dir / f"{stem}{suffix}_bead_plain_{grid}x{grid}.png"
+        chart_path2 = out_dir / f"{stem}{suffix}_bead_chart_{grid_w}x{grid_h}.png"
+        plain_path2 = out_dir / f"{stem}{suffix}_bead_plain_{grid_w}x{grid_h}.png"
         save_bead_chart(
             result, str(chart_path2),
             cell_px=cell_px,
@@ -3672,7 +3696,7 @@ class BeadStudio(QMainWindow):
         stem = dlg.name_edit.text().strip() or "bead"
         out_dir.mkdir(parents=True, exist_ok=True)
 
-        grid = self.result.grid_w
+        grid = max(self.result.grid_w, self.result.grid_h)
         cell_px = max(8, min(24, 1800 // grid))
         exported = []
 
@@ -3775,7 +3799,7 @@ class BeadStudio(QMainWindow):
         self._update_undo_buttons()
 
         # 渲染到 outputs（沿用当前输出目录）
-        grid = result.grid_w
+        grid = max(result.grid_w, result.grid_h)
         cell_px = max(8, min(24, 1800 // grid))
         stem = Path(path).stem
         out_dir = Path(self.out_edit.text())
@@ -3898,7 +3922,7 @@ class BeadStudio(QMainWindow):
 def main():
     app = QtWidgets.QApplication(sys.argv)
     app.setStyle("Fusion")
-    win = BeadStudio()
+    win = Beadobe()
     # 打包自检：--selftest 时构建窗口后立即退出，用于验证打包产物能正常加载
     # 色板与资源（不进入事件循环）。正常使用不带该参数。
     if "--selftest" in sys.argv:

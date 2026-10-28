@@ -120,7 +120,7 @@
 <header class="hero">
   <h1>Beadobe <span class="dot">·</span> 拼豆图纸生成器</h1>
   <p class="sub">把照片 / 卡通图一键转换成可实际拼搭的 MARD 色板拼豆图纸。支持 AI 卡通化、手动编辑、参数调优与多种导出。</p>
-  <p class="sub note">💡 本项目原名 <em>Bead Studio</em>，因同名项目过多改名为 <b>Beadobe</b>。软件内部（可执行文件、代码、配置目录）仍沿用原名，属正常现象。</p>
+  <p class="sub note">💡 本项目原名 <em>Bead Studio</em>，因同名项目过多改名为 <b>Beadobe</b>。所有名称、代码与可执行文件均已统一为 Beadobe。</p>
   <img class="pipeline" src="assets/demo_pipeline.png" alt="流程演示：两条支线">
   <div class="caption">完整流程两条支线：同一张原始照片，不卡通化直接量化（A），或先 AI 卡通化再量化（B，推荐）。两张网格与图纸均与各自的输入源一一对应。</div>
 </header>
@@ -142,9 +142,9 @@
 
   <h3>方式 A：直接运行打包版（推荐，开箱即用）</h3>
   <ol>
-    <li>拿到 <code>BeadStudio</code> 文件夹（内含 <code>BeadStudio.exe</code> 与 <code>_internal</code>）。</li>
-    <li>双击 <code>BeadStudio.exe</code> 即可启动，无需安装 Python。</li>
-    <li>首次启动会在用户目录自动生成配置（<code>%APPDATA%\BeadStudio</code>），不影响使用。</li>
+    <li>拿到 <code>Beadobe</code> 文件夹（内含 <code>Beadobe.exe</code> 与 <code>_internal</code>）。</li>
+    <li>双击 <code>Beadobe.exe</code> 即可启动，无需安装 Python。</li>
+    <li>首次启动会在用户目录自动生成配置（<code>%APPDATA%\Beadobe</code>），不影响使用。</li>
   </ol>
 
   <h3>方式 B：源码运行（适合想改代码 / 用到最新功能）</h3>
@@ -155,7 +155,7 @@ pip install numpy pillow opencv-python PySide6 pyyaml requests
 pip install openai
 
 # 3. 在项目目录启动
-python bead_studio.py</code></pre>
+python beadobe.py</code></pre>
 
   <div class="tip"><b>💡</b>缺失可选依赖时程序不会崩溃，会弹窗说明哪些功能不可用，其余功能照常工作。</div>
 </section>

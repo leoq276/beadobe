@@ -21,7 +21,7 @@ import sys
 from pathlib import Path
 
 # 打包后的应用名（用于用户配置目录）
-_APP_NAME = "BeadStudio"
+_APP_NAME = "Beadobe"
 
 
 def is_frozen() -> bool:
@@ -50,18 +50,18 @@ def user_config_dir() -> Path:
     用户可写配置目录。
 
     优先级：
-      1. 环境变量 BEADSTUDIO_CONFIG_DIR（便于测试/便携模式）
-      2. Windows %APPDATA%/BeadStudio
-      3. 兜底：用户主目录 ~/.beadstudio
+      1. 环境变量 BEADOBE_CONFIG_DIR（便于测试/便携模式）
+      2. Windows %APPDATA%/Beadobe
+      3. 兜底：用户主目录 ~/.beadobe
     """
-    env = os.environ.get("BEADSTUDIO_CONFIG_DIR")
+    env = os.environ.get("BEADOBE_CONFIG_DIR")
     if env:
         return Path(env).expanduser()
     if sys.platform == "win32":
         base = os.environ.get("APPDATA")
         if base:
             return Path(base) / _APP_NAME
-    return Path.home() / ".beadstudio"
+    return Path.home() / ".beadobe"
 
 
 def user_config_path(*parts: str) -> Path:

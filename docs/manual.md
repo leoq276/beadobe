@@ -2,7 +2,7 @@
 
 > 把照片 / 卡通图一键转换成可实际拼搭的 **MARD 色板**拼豆图纸。支持 AI 卡通化、手动编辑、参数调优与多种导出。
 
-> 💡 本项目原名 *Bead Studio*，因同名项目过多改名为 **Beadobe**。软件内部（可执行文件、代码、配置目录）仍沿用原名，属正常现象。
+> 💡 本项目原名 *Bead Studio*，因同名项目过多改名为 **Beadobe**。所有名称、代码与可执行文件均已统一为 Beadobe。
 
 ![完整流程演示](assets/demo_pipeline.png)
 
@@ -27,9 +27,9 @@
 
 ### 方式 A：直接运行打包版（推荐，开箱即用）
 
-1. 拿到 `BeadStudio` 文件夹（内含 `BeadStudio.exe` 与 `_internal`）。
-2. 双击 `BeadStudio.exe` 即可启动，无需安装 Python。
-3. 首次启动会在用户目录自动生成配置（`%APPDATA%\BeadStudio`），不影响使用。
+1. 拿到 `Beadobe` 文件夹（内含 `Beadobe.exe` 与 `_internal`）。
+2. 双击 `Beadobe.exe` 即可启动，无需安装 Python。
+3. 首次启动会在用户目录自动生成配置（`%APPDATA%\Beadobe`），不影响使用。
 
 ### 方式 B：源码运行（适合想改代码 / 用到最新功能）
 
@@ -41,7 +41,7 @@ pip install numpy pillow opencv-python PySide6 pyyaml requests
 pip install openai
 
 # 3. 在项目目录启动
-python bead_studio.py
+python beadobe.py
 ```
 
 > 💡 缺失可选依赖时程序不会崩溃，会弹窗说明哪些功能不可用，其余功能照常工作。

@@ -1,6 +1,6 @@
 # -*- mode: python ; coding: utf-8 -*-
 # 拼豆图纸生成器打包 spec（最小环境 beadbuild 用）
-# 用法: conda run -n beadbuild pyinstaller bead_studio.spec
+# 用法: conda run -n beadbuild pyinstaller beadobe.spec
 from PyInstaller.utils.hooks import collect_submodules
 
 datas = [
@@ -13,7 +13,7 @@ datas = [
 hiddenimports = []
 
 a = Analysis(
-    ["bead_studio.py"],
+    ["beadobe.py"],
     pathex=[],
     binaries=[],
     datas=datas,
@@ -66,7 +66,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name="BeadStudio",
+    name="Beadobe",
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -81,5 +81,5 @@ coll = COLLECT(
     a.datas,
     strip=False,
     upx=False,
-    name="BeadStudio",
+    name="Beadobe",
 )

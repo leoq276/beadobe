@@ -2,7 +2,7 @@
 style.py
 全局样式表（简约高级感：低饱和蓝灰 + 白卡片 + 细边框圆角）。
 
-供 bead_studio.py 与 settings_dialog.py 共用，保证主窗口与对话框视觉统一。
+供 beadobe.py 与 settings_dialog.py 共用，保证主窗口与对话框视觉统一。
 """
 from __future__ import annotations
 
@@ -13,7 +13,7 @@ from pathlib import Path
 # spinbox 箭头图片：QSS 不支持 CSS border 三角技巧，箭头必须用 image 提供。
 # 运行时生成极小的上下箭头 PNG（放系统临时目录），返回可供 QSS url() 用的路径。
 # ---------------------------------------------------------------------------
-_ARROW_DIR = Path(tempfile.gettempdir()) / "beadstudio_arrows"
+_ARROW_DIR = Path(tempfile.gettempdir()) / "beadobe_arrows"
 
 
 def _write_arrow(name: str, up: bool) -> str:

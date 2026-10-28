@@ -5,7 +5,7 @@
 > Turn photos / cartoon images into **MARD palette** perler bead patterns.
 > One-click desktop GUI, built-in AI cartoonization, and pure-numpy pixelization — zero heavy dependencies for the core pipeline.
 
-> 💡 **About the name**: this project was originally named *Bead Studio* (named by AI), but was renamed to **Beadobe** because the old name was too common. Internal identifiers (the executable, code, and config directory) still keep the original name — e.g. `BeadStudio.exe`, `bead_studio.py`, `%APPDATA%\BeadStudio`. This is expected and does not affect usage.
+> 💡 **About the name**: this project was originally named *Bead Studio* (named by AI), but was renamed to **Beadobe** because the old name was too common. All names, code, and executables have been unified under Beadobe.
 
 **🎯 Illustrated manual** (pick one, same content):
 - [manual.md](docs/manual.md) — readable directly on GitHub
@@ -31,8 +31,8 @@ Full workflow at a glance:
 
 ### Option 1: Download prebuilt binary (recommended, no environment needed)
 
-1. Go to [Releases](https://github.com/leoq276/beadobe/releases) and download the latest `BeadStudio-v1.0.0-windows-x64.zip`
-2. Unzip and double-click `BeadStudio.exe` to run — no Python required
+1. Go to [Releases](https://github.com/leoq276/beadobe/releases) and download the latest `Beadobe-v1.0.0-windows-x64.zip`
+2. Unzip and double-click `Beadobe.exe` to run — no Python required
 
 ### Option 2: Run from source
 
@@ -40,7 +40,7 @@ Full workflow at a glance:
 pip install numpy pillow PySide6 requests openai pyyaml
 
 # Launch the desktop GUI
-python bead_studio.py
+python beadobe.py
 ```
 
 > AI cartoonization is optional — configure your API key in "⚙️ Settings" first (see `docs/manual.html`, Section 3).
@@ -50,7 +50,7 @@ python bead_studio.py
 ## Project Structure
 
 ```
-├── bead_studio.py            # Desktop GUI main program (PySide6)
+├── beadobe.py                # Desktop GUI main program (PySide6)
 ├── run_quantize.py           # Quantization entry (CLI)
 ├── core/                     # Core library
 │   ├── quantize.py           # Quantization core (layered decision + island cleanup)
